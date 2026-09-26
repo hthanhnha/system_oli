@@ -13,8 +13,8 @@ export async function serverFetch(
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
   }
-
-  const rawBaseUrl = process.env.NEXT_PUBLIC_API_URL || "https://system-oli.onrender.com/api/n1";
+  // Thay vì dùng process.env, bạn gán thẳng link vào đây để test trực tiếp
+  const rawBaseUrl = "https://system-oli.onrender.com/api/n1";
 
   // Chuẩn hóa đường dẫn để tránh bị thừa hoặc thiếu dấu gạch chéo (/)
   const baseUrl = rawBaseUrl.endsWith("/") ? rawBaseUrl.slice(0, -1) : rawBaseUrl;
