@@ -17,16 +17,31 @@ import { Menu } from './menu/entities/menu.entity';
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get<string>('DB_HOST', 'localhost'),
-        port: configService.get<number>('DB_PORT', 5432),
-        username: configService.get<string>('DB_USERNAME', 'postgres'),
-        password: configService.get<string>('DB_PASSWORD', 'postgres_password'),
-        database: configService.get<string>('DB_DATABASE', 'my_shop_db'),
-        entities: [User, Product, Menu],
-        synchronize: true, // Tự động tạo/đồng bộ bảng trong môi trường dev
-      }),
+      useFactory: (configService: ConfigService) => {
+        // Ưu tiên dùng DATABASE_URL nếu có (dành cho Render Cloud)
+        const databaseUrl = configService.get<string>('DATABASE_URL');
+        if (databaseUrl) {
+          return {
+            type: 'postgres',
+            url: databaseUrl,
+            entities: [User, Product, Menu],
+            synchronize: true,
+            ssl: { rejectUnauthorized: false }, // Bắt buộc cho database trên Render
+          };
+        }
+
+        // Nếu không có DATABASE_URL thì dùng các biến rời (dành cho chạy Local)
+        return {
+          type: 'postgres',
+          host: configService.get<string>('DB_HOST', 'localhost'),
+          port: configService.get<number>('DB_PORT', 5432),
+          username: configService.get<string>('DB_USERNAME', 'postgres'),
+          password: configService.get<string>('DB_PASSWORD', 'postgres_password'),
+          database: configService.get<string>('DB_DATABASE', 'my_shop_db'),
+          entities: [User, Product, Menu],
+          synchronize: true, // Tự động tạo/đồng bộ bảng trong môi trường dev
+        };
+      },
       inject: [ConfigService],
     }),
     UsersModule,
