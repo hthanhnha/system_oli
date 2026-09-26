@@ -10,13 +10,13 @@ async function bootstrap() {
   app.setGlobalPrefix('api/n1');
 
   // Bật Validation global cho các DTOs
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-      forbidNonWhitelisted: true,
-    }),
-  );
+  // Cho phép toàn bộ các domain (hoặc cấu hình rõ ràng) gọi API và nhận đủ credentials
+  app.enableCors({
+    origin: '*', // Cho phép mọi nguồn gọi vào để test, hoặc bạn có thể thay bằng domain Vercel cụ thể
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Accept, Authorization',
+    credentials: true,
+  });
 
   // Cho phép Next.js và Mobile App gọi API mà không bị lỗi CORS
   app.enableCors();
