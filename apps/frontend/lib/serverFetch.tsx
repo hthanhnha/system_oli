@@ -14,8 +14,8 @@ export async function serverFetch(
     headers.set("Authorization", `Bearer ${token}`);
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7777";
-  
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://system-oli.onrender.com/api/n1";
+
   const response = await fetch(`${baseUrl}${endpoint}`, {
     ...options,
     headers,
