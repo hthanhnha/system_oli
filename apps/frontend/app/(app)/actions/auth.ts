@@ -55,7 +55,7 @@ export async function registerAction(prevState: any, formData: FormData): Promis
   const phone = formData.get("phone") as string;
 
   try {
-    const res = await serverFetch("/auth/register", {
+    const res = await serverFetch("/users/register", {
       method: "POST",
       body: JSON.stringify({ fullName, email, password, phone }),
     });
