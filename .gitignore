@@ -1,0 +1,23 @@
+# Dependencies / Thư viện rác (Bắt buộc phải bỏ qua)
+node_modules/
+**/node_modules/
+
+# Next.js build files
+.next/
+out/
+build/
+
+# NestJS build files
+dist/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor logs
+.DS_Store
+Thumbs.db
+.vscode/
