@@ -1,12 +1,11 @@
 "use server";
 import { serverFetch } from "@/lib/serverFetch";
-
 export async function getProducts(params?: { page?: number; limit?: number }) {
   try {
     const searchParams = new URLSearchParams();
     if (params?.page) searchParams.append("page", params.page.toString());
     if (params?.limit) searchParams.append("limit", params.limit.toString());
-    
+
     const query = searchParams.toString() ? `?${searchParams.toString()}` : "";
     const res = await serverFetch(`/shop/products${query}`, {
       method: "GET",
