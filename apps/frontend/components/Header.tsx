@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { cookies } from "next/headers";
 import { logoutAction } from "@/app/(app)/actions/auth";
-import { getMenus } from "@/app/(app)/menu/product/layoutAction";
+import { getMenus } from "@/app/(app)/menu/products/layoutAction";
 import { getProducts } from "@/app/(app)/product/productAction";
 
 export async function Header() {

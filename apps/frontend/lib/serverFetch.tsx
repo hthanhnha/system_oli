@@ -13,17 +13,10 @@ export async function serverFetch(
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
   }
-  // Thay vì dùng process.env, bạn gán thẳng link vào đây để test trực tiếp
-  const rawBaseUrl = "https://system-oli.onrender.com/api/n1";
 
-  // Chuẩn hóa đường dẫn để tránh bị thừa hoặc thiếu dấu gạch chéo (/)
-  const baseUrl = rawBaseUrl.endsWith("/") ? rawBaseUrl.slice(0, -1) : rawBaseUrl;
-  const formattedEndpoint = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7777";
 
-  const fullUrl = `${baseUrl}${formattedEndpoint}`;
-  console.log("--> Requesting URL:", fullUrl); // Dòng log này sẽ in ra kết quả trên server của Vercel
-
-  const response = await fetch(fullUrl, {
+  const response = await fetch(`${baseUrl}${endpoint}`, {
     ...options,
     headers,
   });
