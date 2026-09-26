@@ -57,7 +57,7 @@ export default function HomePage() {
 
             <div className="relative z-10 hidden md:flex flex-col items-center text-center px-6 max-w-4xl mx-auto">
                 <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-white mb-6 drop-shadow-md">
-                    Chăm Sóc Động Cơ HOÀN HÀO HOÀN <br />
+                    Chăm Sóc Động Cơ <br />
                     <span className="text-blue-500">Hoàn Hảo</span>
                 </h1>
                 <p className="text-lg md:text-xl text-zinc-300 mb-10 max-w-2xl font-medium">
